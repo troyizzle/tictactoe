@@ -9,7 +9,9 @@ describe TicTacToe do
     end
 
     context "with mismatched row lengths" do
-      subject { TicTacToe.new([["x", "o"], ["x", "x", "x"]]).winner }
+      subject do
+        TicTacToe.new([["x", "o"], ["x", "x", "x"], ["x", "x", "x"]]).winner
+      end
 
       it { expect { subject }.to raise_error("Invalid rows") }
     end
@@ -21,6 +23,12 @@ describe TicTacToe do
       end
 
       it { expect { subject }.to raise_error("Invalid input") }
+    end
+
+    context "with invalid rows length" do
+      subject { TicTacToe.new([["x", " ", "o"], ["x", "x", "x"]]).winner }
+
+      it { expect { subject }.to raise_error("Invalid row length") }
     end
   end
 
