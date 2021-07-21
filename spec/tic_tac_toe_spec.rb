@@ -1,6 +1,29 @@
 require_relative "../tic_tac_toe"
 
 describe TicTacToe do
+  describe "invalid board" do
+    context "with empty board" do
+      subject { TicTacToe.new([]).winner }
+
+      it { expect { subject }.to raise_error("No game board") }
+    end
+
+    context "with mismatched row lengths" do
+      subject { TicTacToe.new([["x", "o"], ["x", "x", "x"]]).winner }
+
+      it { expect { subject }.to raise_error("Invalid rows") }
+    end
+
+    context "with invalid input" do
+      subject do
+        TicTacToe.new([["b", "x", "c"], ["x", " ", "o"], ["x", "x", "x"]])
+          .winner
+      end
+
+      it { expect { subject }.to raise_error("Invalid input") }
+    end
+  end
+
   describe "rows" do
     it "returns the correct winner when match found on the first row" do
       board_o = [
