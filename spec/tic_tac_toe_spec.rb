@@ -30,6 +30,14 @@ describe TicTacToe do
 
       it { expect { subject }.to raise_error("Invalid row length") }
     end
+
+    [1, 'foo', { foo: 'bar' }, false, :test, nil].each do |type|
+      context "with #{type} board" do
+        subject { TicTacToe.new(type).winner }
+
+        it { expect { subject }.to raise_error("Invalid board") }
+      end
+    end
   end
 
   describe "rows" do

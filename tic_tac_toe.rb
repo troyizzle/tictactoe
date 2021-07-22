@@ -6,9 +6,11 @@ class TicTacToe
   INVALID_ROWS_MESSAGE = "Invalid rows".freeze
   INVALID_INPUT_MESSAGE = "Invalid input".freeze
   INVALID_ROW_LENGTH_MESSAGE = "Invalid row length".freeze
+  INVALID_BOARD = "Invalid board".freeze
 
   def initialize(board)
     @board = board
+    raise INVALID_BOARD unless @board.is_a? Array
     raise NO_GAME_BOARD_MESSAGE if @board.length.zero?
     raise INVALID_ROW_LENGTH_MESSAGE if @board.length.even?
     @row_length = @board.first.length
