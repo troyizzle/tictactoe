@@ -183,11 +183,23 @@ describe TicTacToe do
   end
 
   describe "draws" do
-    it "returns 'unfinished' when the board is a draw" do
+    it "returns 'draw' when the board is a draw" do
       board = [
         ["o", "x", "o"],
         ["o", "x", "x"],
         ["x", "o", "o"]
+      ]
+
+      expect(TicTacToe.new(board).winner).to eq("draw")
+    end
+  end
+
+  describe "unfinished" do
+    it "returns 'unfinished' when the board is not finished'" do
+      board = [
+        ["o", " ", "o"],
+        ["x", " ", "x"],
+        ["o", "x", "o"]
       ]
 
       expect(TicTacToe.new(board).winner).to eq("unfinished")

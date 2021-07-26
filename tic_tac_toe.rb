@@ -1,5 +1,6 @@
 class TicTacToe
   UNFINISHED_MESSAGE = "unfinished".freeze
+  DRAW_MESSAGE = "draw".freeze
   PLAYER_ONE = "x".freeze
   PLAYER_TWO = "o".freeze
   NO_GAME_BOARD_MESSAGE = "No game board".freeze
@@ -18,17 +19,23 @@ class TicTacToe
   end
 
   def winner
+    unfinished = false
+
     @inputs.each_value do |inputs|
-      case inputs
-      when winning_player_one_input then return PLAYER_ONE
-      when winning_player_two_input then return PLAYER_TWO
-      end
+      return PLAYER_ONE if inputs == winning_player_one_input
+      return PLAYER_TWO if inputs == winning_player_two_input
+
+      unfinished = true if unfinished_board? inputs
     end
 
-    UNFINISHED_MESSAGE
+    unfinished ? UNFINISHED_MESSAGE : DRAW_MESSAGE
   end
 
   private
+
+  def unfinished_board?(inputs)
+    inputs.delete(' ').length != @row_length
+  end
 
   def winning_player_one_input
     PLAYER_ONE * @row_length
